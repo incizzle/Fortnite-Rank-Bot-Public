@@ -1,0 +1,38 @@
+{
+    "prefix": {
+        "type": "String",
+        "default": "!",
+        "array": false,
+        "sql": "TEXT NOT NULL DEFAULT '!'"
+    },
+    "language": {
+        "type": "Language",
+        "default": "en-US",
+        "array": false,
+        "sql": "TEXT NOT NULL DEFAULT 'en-US'"
+    },
+    "disabledCommands": {
+        "type": "Command",
+        "default": [],
+        "array": true,
+        "sql": "TEXT DEFAULT '[]'"
+    },
+    "minkd": {
+        "type": "Float",
+        "default": 1.0,
+        "array": false,
+        "sql": "TEXT NOT NULL DEFAULT '1.0'"
+    },
+    "verifiedrole": {
+        "type": "Role",
+        "default": "",
+        "array": false,
+        "sql": "TEXT NOT NULL DEFAULT ''"
+    },
+    "commandchannel": {
+        "type": "TextChannel",
+        "default": "",
+        "array": false,
+        "sql": "TEXT NOT NULL DEFAULT ''"
+    }
+}

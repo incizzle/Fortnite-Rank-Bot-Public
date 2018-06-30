@@ -1,1 +1,1 @@
-Fortnite-Rank-Bot-Public
+Fortnite Rank Bot
