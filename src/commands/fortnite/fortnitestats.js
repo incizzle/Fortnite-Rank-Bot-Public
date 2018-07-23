@@ -34,6 +34,7 @@ module.exports = class extends Command {
     }
 
     async run(message, Client ) {
+        console.log(`${message.author.username}: ${message.content}`)
         if (message.channel.id === message.guild.settings.commandchannel) {
             const args = message.content.slice("!".length).trim().split(/ +/g);
             const command = args.shift().toLowerCase();
@@ -50,7 +51,7 @@ module.exports = class extends Command {
                 url: `https://fortnitetracker.com/profile/pc/${urlusername}`,
                 //description: "",
                 fields: [{
-                    name: "**__Solo Season 4__**",
+                    name: "**__Solo Season 5__**",
                     value: `TRN Rating: **${data.curr_solo.trnRating.value}**
 K/D: **${data.curr_solo.kd.value}**
 Kills: **${data.curr_solo.kills.value}** 
@@ -59,7 +60,7 @@ Matches Played: **${data.curr_solo.matches.value}**`,
                     inline: true,
                 },
                 {
-                    name: "**__Duo Season 4__**",
+                    name: "**__Duo Season 5__**",
                     value: `TRN Rating: **${data.curr_duo.trnRating.value}**
 K/D: **${data.curr_duo.kd.value}**
 Kills: **${data.curr_duo.kills.value}** 
@@ -68,12 +69,39 @@ Matches Played: **${data.curr_duo.matches.value}**`,
                     inline: true,
                 },
                 {
-                    name: "**__Squad Season 4__**",
+                    name: "**__Squad Season 5__**",
                     value: `TRN Rating: **${data.curr_squad.trnRating.value}**
 K/D: **${data.curr_squad.kd.value}**
 Kills: **${data.curr_squad.kills.value}** 
 Wins: **${data.curr_squad.top1.value}**
 Matches Played: **${data.curr_squad.matches.value}**`,
+                    inline: true,
+                },
+                {
+                    name: "**__Solo Season 4__**",
+                    value: `TRN Rating: **${data.prior_solo.trnRating.value}**
+K/D: **${data.prior_solo.kd.value}** 
+Kills: **${data.prior_solo.kills.value}** 
+Wins: **${data.prior_solo.top1.value}**
+Matches Played: **${data.prior_solo.matches.value}**`,
+                    inline: true,
+                },
+                {
+                    name: "**__Duo Season 4__**",
+                    value: `TRN Rating: **${data.prior_duo.trnRating.value}**
+K/D: **${data.prior_duo.kd.value}**
+Kills: **${data.prior_duo.kills.value}** 
+Wins: **${data.prior_duo.top1.value}**
+Matches Played: **${data.prior_duo.matches.value}**`,
+                    inline: true,
+                },
+                {
+                    name: "**__Squad Season 4__**",
+                    value: `TRN Rating: **${data.prior_squad.trnRating.value}**
+K/D: **${data.prior_squad.kd.value}**
+Kills: **${data.prior_squad.kills.value}** 
+Wins: **${data.prior_squad.top1.value}**
+Matches Played: **${data.prior_squad.matches.value}**`,
                     inline: true,
                 },
                 {
@@ -134,7 +162,9 @@ Matches Played: **${data.stats.matches}**`,
             console.log(e)
             message.channel.send({embed: {
                 color: 0xff0000,
-                description: `${message.author} Doesnt look like I could find this user. Maybe Try Again`,
+                description: `${message.author} Doesnt look like I can find the user **${username}**.
+
+**__Usage:__** ${message.guild.settings.prefix}ftn InGameName`,
                 timestamp: new Date(),
                 footer: {
                     icon_url: this.client.user.avatarURL,

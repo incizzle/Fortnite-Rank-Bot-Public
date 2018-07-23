@@ -35,6 +35,7 @@ module.exports = class extends Command {
     }
 
     async run(message) {
+        console.log(`${message.author.username}: ${message.content}`)
         if (message.channel.id === message.guild.settings.commandchannel) {
             if (message.guild.settings.verifiedrole == "") {
                 message.channel.send({embed: {
@@ -54,12 +55,28 @@ module.exports = class extends Command {
                         if ( data.curr_squad.kd.value > message.guild.settings.minkd) {
                             message.channel.send({embed: {
                                 color: 0xff0000,
-                                description: `${message.mentions.members.first().displayName} has a ${data.curr_squad.kd.value} K/D. I have given them the Verified Role!`,
+                                author: {
+                                name: `${message.guild.settings.prefix}verify`,
+                                icon_url: message.author.avatarURL
+                                },
+                                title: `**${message.mentions.members.first().displayName}** has over a ${message.guild.settings.minkd} K/D. I have given them the Verified Role!`,
+                                //description: "",
+                                fields: [{
+                                    name: "**__Season 4__**",
+                                    value: `K/D: **${data.prior_squad.kd.value}**`,
+                                    inline: true,
+                                },
+                                {
+                                    name: "**__Season 5__**",
+                                    value: `K/D: **${data.curr_squad.kd.value}**`,
+                                    inline: true,
+                                },
+                                ],
                                 timestamp: new Date(),
                                 footer: {
-                                    icon_url: this.client.user.avatarURL,
-                                    text: `@${this.client.user.username}`
-                                    }
+                                icon_url: this.client.user.avatarURL,
+                                text: `@${this.client.user.username}`
+                                }
                             }});
                             var role = message.guild.roles.get(message.guild.settings.verifiedrole)
                             message.mentions.members.first().addRole(role).catch(e => {
@@ -69,7 +86,9 @@ module.exports = class extends Command {
                         else {
                             message.channel.send({embed: {
                                 color: 0xff0000,
-                                description: `${message.mentions.members.first().displayName} doesn't have a ${message.guild.settings.minkd} K/D <@&436938670419869706>`,
+                                description: `${message.mentions.members.first().displayName} doesn't have a ${message.guild.settings.minkd} K/D :(
+
+Make sure your discord nickname is your In Game Name :)`,
                                 timestamp: new Date(),
                                 footer: {
                                     icon_url: this.client.user.avatarURL,
@@ -81,7 +100,9 @@ module.exports = class extends Command {
                         console.log(e)
                         message.channel.send({embed: {
                             color: 0xff0000,
-                            description: `${message.author} Looks like something went wrong :( . Make sure their nickname is their exact IGN`,
+                            description: `${message.author} Looks like something went wrong :( . Make sure their nickname is their exact IGN
+
+**Usage:** ${message.guild.settings.prefix}verify`,
                             timestamp: new Date(),
                             footer: {
                                 icon_url: this.client.user.avatarURL,
@@ -93,24 +114,42 @@ module.exports = class extends Command {
                 else{
                     let data = Fortnite.get(message.member.displayName, 'pc').then(data => {
                         if ( data.curr_squad.kd.value > message.guild.settings.minkd) {
-                            message.channel.send({embed: {
-                                color: 0xff0000,
-                                description: `${message.member.displayName} has a ${data.curr_squad.kd.value} K/D. I have given them the Verified Role!`,
-                                timestamp: new Date(),
-                                footer: {
-                                    icon_url: this.client.user.avatarURL,
-                                    text: `@${this.client.user.username}`
-                                    }
-                            }});
                             var role = message.guild.roles.get(message.guild.settings.verifiedrole)
                             message.member.addRole(role).catch(e => {
                                 console.log(e)
                             })
+                            message.channel.send({embed: {
+                                color: 0xff0000,
+                                author: {
+                                name: `${message.guild.settings.prefix}verify`,
+                                icon_url: message.author.avatarURL
+                                },
+                                title: `**${message.member.displayName}** has over a ${message.guild.settings.minkd} K/D. I have given them the Verified Role!`,
+                                //description: "",
+                                fields: [{
+                                    name: "**__Season 4__**",
+                                    value: `K/D: **${data.prior_squad.kd.value}**`,
+                                    inline: true,
+                                },
+                                {
+                                    name: "**__Season 5__**",
+                                    value: `K/D: **${data.curr_squad.kd.value}**`,
+                                    inline: true,
+                                },
+                                ],
+                                timestamp: new Date(),
+                                footer: {
+                                icon_url: this.client.user.avatarURL,
+                                text: `@${this.client.user.username}`
+                                }
+                            }});
                         }
                         else {
                             message.channel.send({embed: {
                                 color: 0xff0000,
-                                description: `${message.member.nickname} doesn't have a ${message.guild.settings.minkd} K/D <@&436938670419869706>`,
+                                description: `${message.member.nickname} doesn't have a ${message.guild.settings.minkd} K/D :(
+
+Make sure your discord nickname is your In Game Name :)`,
                                 timestamp: new Date(),
                                 footer: {
                                     icon_url: this.client.user.avatarURL,
@@ -122,7 +161,9 @@ module.exports = class extends Command {
                     console.log(e)
                     message.channel.send({embed: {
                         color: 0xff0000,
-                        description: `${message.author} Looks like something went wrong :( . Make sure your nickname is your exact IGN`,
+                        description: `${message.author} Looks like something went wrong :( . Make sure your nickname is their exact IGN
+
+**Usage:** ${message.guild.settings.prefix}verify`,
                         timestamp: new Date(),
                         footer: {
                             icon_url: this.client.user.avatarURL,
