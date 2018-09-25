@@ -41,7 +41,7 @@ module.exports = class extends Command {
                 text: `@${this.client.user.username}`
                 }
         }});
-        message.channel.send("https://discord.gg/Z8qHU73")
+        message.channel.send("https://discord.gg/z2hRKJc")
         console.log(`${message.author.username}: ${message.content}`)
         ;
     }

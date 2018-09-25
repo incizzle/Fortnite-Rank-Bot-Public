@@ -179,4 +179,4 @@ exports.config = {
 };
 
 // The token for this bot to login with
-exports.token = 'DISCORDBOTKEY';
+exports.token = '';

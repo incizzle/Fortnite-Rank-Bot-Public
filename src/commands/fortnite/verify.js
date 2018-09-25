@@ -63,7 +63,7 @@ module.exports = class extends Command {
                                 //description: "",
                                 fields: [{
                                     name: "**__Season 4__**",
-                                    value: `K/D: **${data.prior_squad.kd.value}**`,
+                                    value: `K/D: **NA**`,
                                     inline: true,
                                 },
                                 {
@@ -128,7 +128,7 @@ Make sure your discord nickname is your In Game Name :)`,
                                 //description: "",
                                 fields: [{
                                     name: "**__Season 4__**",
-                                    value: `K/D: **${data.prior_squad.kd.value}**`,
+                                    value: `K/D: **NA**`,
                                     inline: true,
                                 },
                                 {
